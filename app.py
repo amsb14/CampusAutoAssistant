@@ -12,7 +12,7 @@ import json
 import warnings
 
 # Load the JSON file
-with open('data\data.json', encoding='utf-8') as file:
+with open('/data/data.json', encoding='utf-8') as file:
     data = json.load(file)
 
 css = """
