@@ -2,17 +2,17 @@ import pandas as pd
 import xlsxwriter
 import streamlit as st
 import io
-from generateTables import run as generateTables
-from generateLabTables import run as generateLabTables
-from generateStudentTables import run as generateStudentTables
-from generateWholeTables import run as generateWholeTables
-from generateWholeLabTables import run as generateWholeLabTables
-from clean_data import clean_some_errors
+from  utils.generateTables import run as generateTables
+from utils.generateLabTables import run as generateLabTables
+from utils.generateStudentTables import run as generateStudentTables
+from utils.generateWholeTables import run as generateWholeTables
+from utils.generateWholeLabTables import run as generateWholeLabTables
+
 import json
 import warnings
 
 # Load the JSON file
-with open('data.json', encoding='utf-8') as file:
+with open('data\data.json', encoding='utf-8') as file:
     data = json.load(file)
 
 css = """
