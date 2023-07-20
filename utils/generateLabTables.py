@@ -222,7 +222,7 @@ def create_excel_file(lab):
         
 def run(file,department):
     global workbook, df
-    df = pd.read_csv(rayat_file)
+    df = pd.read_csv(file)
     LIST_OF_LABS_ID = get_lab_department(department)    
     output = io.BytesIO()
     workbook = xlsxwriter.Workbook(output, {'in_memory': True})  
