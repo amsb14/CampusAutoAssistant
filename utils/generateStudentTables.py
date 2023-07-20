@@ -4,7 +4,7 @@ import io
 
 parent_path = os.path.join(os.getcwd())
 sheet_name = 'جداول الطلاب'
-excel_file = rf'{parent_path}\{sheet_name}.xlsx'
+# excel_file = rf'{parent_path}\{sheet_name}.xlsx'
 time_cells_dict = {
     "08": "BC", "09": "DE", "10": "FG", "11": "HI",
     "12": "JK", "13": "LM", "14": "NO", "15": "PQ", "16": "RS", "17": "TU"
