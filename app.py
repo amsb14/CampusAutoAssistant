@@ -21,6 +21,10 @@ css = """
         direction: rtl;
         text-align: right;
         
+    #GithubIcon {
+      visibility: hidden;
+    }
+        
 </style>
 """
 
