@@ -26,10 +26,11 @@ css = """
 """
 
 hide_github_icon = """
+<style>
 #MainMenu {
   visibility: hidden;
 }
-
+</style>
 """
 
 font_link = """
