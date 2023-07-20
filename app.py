@@ -30,6 +30,11 @@ hide_github_icon = """
 #MainMenu {
   visibility: hidden;
 }
+    
+#GithubIcon {
+  visibility: hidden;
+}
+    
 </style>
 """
 
