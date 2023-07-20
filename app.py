@@ -43,7 +43,7 @@ font_link = """
 
 st.markdown(font_link, unsafe_allow_html=True)
 st.markdown(css, unsafe_allow_html=True)
-# st.markdown(hide_github_icon, unsafe_allow_html=True)
+st.markdown(hide_github_icon, unsafe_allow_html=True)
 
 title = "تحميل جداول الأقسام التدريبية (مدربين/قاعات/الجداول المجمعة)"
 st.markdown(f'<div class="rtl" style="font-size: 30pt; font-family: Cairo; margin-bottom: 100px; text-align: center;">{title}</div>', unsafe_allow_html=True)
