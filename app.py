@@ -20,7 +20,7 @@ css = """
     .rtl {
         direction: rtl;
         text-align: right;
-    }
+        
 </style>
 """
 
@@ -98,9 +98,21 @@ if uploaded_file is not None:
         st.markdown(f'<div class="rtl" style="font-size: 12pt; font-family: Cairo;">{upload_2nd_file_text}</div>', unsafe_allow_html=True)
         uploaded_SF24_file  = st.file_uploader('', type='csv', key=2)
         if uploaded_SF24_file is not None:
-            words = [data['Timetable_Type'][2]]
-            st.download_button(label=download_label, data=generateStudentTables(uploaded_file, uploaded_SF24_file), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
+            st.markdown(f'<div class="rtl" style="font-size: 12pt; font-family: Cairo;">{department_text}</div>', unsafe_allow_html=True)
+            department = st.selectbox("", [data['Departments'][0], data['Departments'][1], data['Departments'][3]])
             
+            if department == data['Departments'][0]:
+                words = [data['Timetable_Type'][2], data['Departments'][0]]
+                st.download_button(label=download_label, data=generateStudentTables(uploaded_file, uploaded_SF24_file, data['Departments'][0]), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
+                
+            elif department == data['Departments'][1]:
+                words = [data['Timetable_Type'][2], data['Departments'][1]]
+                st.download_button(label=download_label, data=generateStudentTables(uploaded_file, uploaded_SF24_file, data['Departments'][1]), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
+                
+            else:
+                words = [data['Timetable_Type'][2], data['Departments'][3]]
+                st.download_button(label=download_label, data=generateStudentTables(uploaded_file, uploaded_SF24_file, department='all'), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
+                
         
     
     elif selected_type == data['Timetable_Type'][3]:

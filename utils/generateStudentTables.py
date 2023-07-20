@@ -26,9 +26,18 @@ def studentName(userID):
     df_new = dfsf24[dfsf24['رقم الطالب'] == (userID)]
     return df_new['إسم الطالب'].iloc[0]
 
-def comIDs():
-    IDs = list(set(dfsf24['رقم الطالب']))
+# def comIDs():
+#     IDs = list(set(dfsf24['رقم الطالب']))
+#     return IDs
+
+def get_lab_department(department='all'):
+    """Return computer ids"""
+    if department != "all":
+        IDs = dfsf24.loc[dfsf24['القسم'] == department, 'رقم الطالب'].unique().tolist()
+    else:
+        IDs = dfsf24['رقم الطالب'].unique().tolist()
     return IDs
+
 
 def split(txt):
     res = [i.split('\n') for i in txt][0]
@@ -223,11 +232,11 @@ def create_excel_file(student_id):
         worksheet.merge_range(f"{time_cells_dict[i][0]}{row+1}:{time_cells_dict[i][1]}{row+1}", f'{e}',  merge_format('#2FBAB3', '9'))
          
         
-def run(file1, file2):
+def run(file1, file2, department):
     global workbook, dfss01, dfsf24
     dfss01 = pd.read_csv(file1)
     dfsf24 = pd.read_csv(file2)
-    LIST_OF_STUDENT_ID = comIDs()  
+    LIST_OF_STUDENT_ID = get_lab_department(department)  
     output = io.BytesIO()
     workbook = xlsxwriter.Workbook(output, {'in_memory': True})  
     for STUDENT_ID in LIST_OF_STUDENT_ID:
