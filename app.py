@@ -26,17 +26,14 @@ css = """
 """
 
 hide_github_icon = """
-<style>
-#MainMenu {
-  visibility: hidden;
-}
-    
-#GithubIcon {
-  visibility: hidden;
-}
-    
-</style>
-"""
+    <style>
+    .css-1jc7ptx, .e1ewe7hr3, .viewerBadge_container__1QSob,
+    .styles_viewerBadge__1yB5_, .viewerBadge_link__1S137,
+    .viewerBadge_text__1JaDK {
+        display: none;
+    }
+    </style>
+    """
 
 font_link = """
 <link rel="preconnect" href="https://fonts.googleapis.com">
