@@ -178,7 +178,7 @@ def create_excel_file(lab):
     worksheet.set_column('A:U', 6.29) 
 
     # Insert image (tvtc)
-    worksheet.insert_image('G1', rf'{parent_path}\icon\tvtc.jpg', {'x_scale': 0.3, 'y_scale': 0.3, 'x_offset': 100,'y_offset': 0})
+    worksheet.insert_image('G1', 'icon/tvtc.jpg', {'x_scale': 0.3, 'y_scale': 0.3, 'x_offset': 100,'y_offset': 0})
     
 
     worksheet.merge_range("A1:F1", "المملكة العربية السعودية" , no_Border( '#FFFFFF', 12))

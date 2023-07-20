@@ -168,7 +168,7 @@ def create_excel_file(student_id):
     worksheet.set_column('B:U', 2.86) 
 
     # Insert image (tvtc)
-    worksheet.insert_image('G1', rf'{parent_path}\icon\tvtc.jpg', {'x_scale': 0.3, 'y_scale': 0.3, 'x_offset': 0,'y_offset': 0})
+    worksheet.insert_image('G1', 'icon/tvtc.jpg', {'x_scale': 0.3, 'y_scale': 0.3, 'x_offset': 0,'y_offset': 0})
     
 
     worksheet.merge_range("A1:F1", "المملكة العربية السعودية" , no_Border('#FFFFFF', 9))
