@@ -21,11 +21,12 @@ css = """
         direction: rtl;
         text-align: right;
         
-    #GithubIcon {
-      visibility: hidden;
-    }
         
 </style>
+"""
+
+hide_github_icon = """
+.css-1jc7ptx, .e1ewe7hr3, .viewerBadge_container__1QSob, .styles_viewerBadge__1yB5_, .viewerBadge_link__1S137, .viewerBadge_text__1JaDK{ display: none; } #MainMenu{ visibility: hidden; } footer { visibility: hidden; } header { visibility: hidden; }
 """
 
 font_link = """
@@ -36,7 +37,7 @@ font_link = """
 
 st.markdown(font_link, unsafe_allow_html=True)
 st.markdown(css, unsafe_allow_html=True)
-
+st.markdown(hide_github_icon, unsafe_allow_html=True)
 
 title = "تحميل جداول الأقسام التدريبية (مدربين/قاعات/الجداول المجمعة)"
 st.markdown(f'<div class="rtl" style="font-size: 30pt; font-family: Cairo; margin-bottom: 100px; text-align: center;">{title}</div>', unsafe_allow_html=True)
