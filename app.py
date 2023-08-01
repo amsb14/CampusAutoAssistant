@@ -55,6 +55,7 @@ uploaded_file  = st.file_uploader("", type='csv', key=1)
 download_label = "تنزيل الملف"
 
 if uploaded_file is not None:
+    
 
     
     select_box_text = "اختر نوع الجدول المراد تنزيله على جهازك"
@@ -64,6 +65,7 @@ if uploaded_file is not None:
     department_text = "اختر القسم التدريبي"
     upload_2nd_file_text = "قم برفع ملف SF24 من تقارير رايات بتنسيق (CSV)"
     
+    
     if selected_type == data['Timetable_Type'][0]:
         
         
@@ -71,40 +73,58 @@ if uploaded_file is not None:
         department = st.selectbox("", data['Departments'])
         if department == data['Departments'][0]:
             words = [data['Timetable_Type'][0], data['Departments'][0]]
-            st.download_button(label=download_label, data=generateTables(uploaded_file, data['Departments'][0]), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
-    
+            try:
+                st.download_button(label=download_label, data=generateTables(uploaded_file, data['Departments'][0]), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
+            except ValueError as e:
+                st.warning(e)
+                
         elif department == data['Departments'][1]:
             words = [data['Timetable_Type'][0], data['Departments'][1]]
-            st.download_button(label=download_label, data=generateTables(uploaded_file, data['Departments'][1]), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
+            try:
+                st.download_button(label=download_label, data=generateTables(uploaded_file, data['Departments'][1]), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
+            except ValueError as e:
+                st.warning(e)
     
         elif department == data['Departments'][2]:
             words = [data['Timetable_Type'][0], data['Departments'][2]]
-            st.download_button(label=download_label, data=generateTables(uploaded_file, data['Departments'][2]), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
-    
+            try:
+                st.download_button(label=download_label, data=generateTables(uploaded_file, data['Departments'][2]), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
+            except ValueError as e:
+                st.warning(e)
+                
         else:
             words = [data['Timetable_Type'][0], data['Departments'][3]]
-            st.download_button(label=download_label, data=generateTables(uploaded_file, department='all'), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
-            
-    
+            try:
+                st.download_button(label=download_label, data=generateTables(uploaded_file, department='all'), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
+            except ValueError as e:
+                st.warning(e)    
         
+            
     elif selected_type == data['Timetable_Type'][1]:
         st.markdown(f'<div class="rtl" style="font-size: 12pt; font-family: Cairo;">{department_text}</div>', unsafe_allow_html=True)
         department = st.selectbox("", [data['Departments'][0], data['Departments'][1], data['Departments'][3]])
         
         if department == data['Departments'][0]:
             words = [data['Timetable_Type'][1], data['Departments'][0]]
-            st.download_button(label=download_label, data=generateLabTables(uploaded_file, data['Departments'][0]), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
-            
+            try:
+                st.download_button(label=download_label, data=generateLabTables(uploaded_file, data['Departments'][0]), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
+            except ValueError as e:
+                st.warning(e)
+                
         elif department == data['Departments'][1]:
             words = [data['Timetable_Type'][1], data['Departments'][1]]
-            st.download_button(label=download_label, data=generateLabTables(uploaded_file, data['Departments'][1]), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
-            
+            try:
+                st.download_button(label=download_label, data=generateLabTables(uploaded_file, data['Departments'][1]), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
+            except ValueError as e:
+                st.warning(e)
         else:
             words = [data['Timetable_Type'][1], data['Departments'][3]]
-            st.download_button(label=download_label, data=generateLabTables(uploaded_file, department='all'), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
+            try:
+                st.download_button(label=download_label, data=generateLabTables(uploaded_file, department='all'), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
+            except ValueError as e:
+                st.warning(e)
             
-        
-           
+               
     elif selected_type == data['Timetable_Type'][2]:
         st.markdown(f'<div class="rtl" style="font-size: 12pt; font-family: Cairo;">{upload_2nd_file_text}</div>', unsafe_allow_html=True)
         uploaded_SF24_file  = st.file_uploader('', type='csv', key=2)
@@ -114,55 +134,83 @@ if uploaded_file is not None:
             
             if department == data['Departments'][0]:
                 words = [data['Timetable_Type'][2], data['Departments'][0]]
-                st.download_button(label=download_label, data=generateStudentTables(uploaded_file, uploaded_SF24_file, data['Departments'][0]), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
-                
+                try:
+                    st.download_button(label=download_label, data=generateStudentTables(uploaded_file, uploaded_SF24_file, data['Departments'][0]), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
+                except ValueError as e:
+                    st.warning(e)
+                    
             elif department == data['Departments'][1]:
                 words = [data['Timetable_Type'][2], data['Departments'][1]]
-                st.download_button(label=download_label, data=generateStudentTables(uploaded_file, uploaded_SF24_file, data['Departments'][1]), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
-                
+                try:
+                    st.download_button(label=download_label, data=generateStudentTables(uploaded_file, uploaded_SF24_file, data['Departments'][1]), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
+                except ValueError as e:
+                    st.warning(e)
+                    
             else:
                 words = [data['Timetable_Type'][2], data['Departments'][3]]
-                st.download_button(label=download_label, data=generateStudentTables(uploaded_file, uploaded_SF24_file, department='all'), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
-                
+                try:
+                    st.download_button(label=download_label, data=generateStudentTables(uploaded_file, uploaded_SF24_file, department='all'), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
+                except ValueError as e:
+                    st.warning(e)
+            
         
-    
     elif selected_type == data['Timetable_Type'][3]:
         st.markdown(f'<div class="rtl" style="font-size: 12pt; font-family: Cairo;">{department_text}</div>', unsafe_allow_html=True)
         department = st.selectbox("", data['Departments'])
         if department == data['Departments'][0]:
             words = [data['Timetable_Type'][3], data['Departments'][0]]
-            st.download_button(label=download_label, data=generateWholeTables(uploaded_file, data['Departments'][0]), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
-    
+            try:
+                st.download_button(label=download_label, data=generateWholeTables(uploaded_file, data['Departments'][0]), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
+            except ValueError as e:
+                st.warning(e)
+                
         elif department == data['Departments'][1]:
             words = [data['Timetable_Type'][3], data['Departments'][1]]
-            st.download_button(label=download_label, data=generateWholeTables(uploaded_file, data['Departments'][1]), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
-    
+            try:
+                st.download_button(label=download_label, data=generateWholeTables(uploaded_file, data['Departments'][1]), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
+            except ValueError as e:
+                st.warning(e)
+                
         elif department == data['Departments'][2]:
             words = [data['Timetable_Type'][3], data['Departments'][2]]
-            st.download_button(label=download_label, data=generateWholeTables(uploaded_file, data['Departments'][2]), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
-    
+            try:
+                st.download_button(label=download_label, data=generateWholeTables(uploaded_file, data['Departments'][2]), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
+            except ValueError as e:
+                st.warning(e)
+                
         else:
             words = [data['Timetable_Type'][3], data['Departments'][3]]
-            st.download_button(label=download_label, data=generateWholeTables(uploaded_file, department='all'), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
-    
-    
+            try:
+                st.download_button(label=download_label, data=generateWholeTables(uploaded_file, department='all'), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
+            except ValueError as e:
+                st.warning(e)
+            
     elif selected_type == data['Timetable_Type'][4]:
         st.markdown(f'<div class="rtl" style="font-size: 12pt; font-family: Cairo;">{department_text}</div>', unsafe_allow_html=True)
         department = st.selectbox("", [data['Departments'][0], data['Departments'][1], data['Departments'][3]])
         if department == data['Departments'][0]:
             words = [data['Timetable_Type'][4], data['Departments'][0]]
-            st.download_button(label=download_label, data=generateWholeLabTables(uploaded_file, data['Departments'][0]), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
-    
+            try:
+                st.download_button(label=download_label, data=generateWholeLabTables(uploaded_file, data['Departments'][0]), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
+            except ValueError as e:
+                st.warning(e)
+                
         elif department == data['Departments'][1]:
             words = [data['Timetable_Type'][4], data['Departments'][1]]
-            st.download_button(label=download_label, data=generateWholeLabTables(uploaded_file, data['Departments'][1]), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
-    
+            try:
+                st.download_button(label=download_label, data=generateWholeLabTables(uploaded_file, data['Departments'][1]), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
+            except ValueError as e:
+                st.warning(e)
+                
         else:
             words = [data['Timetable_Type'][4], data['Departments'][3]]
-            st.download_button(label=download_label, data=generateWholeLabTables(uploaded_file, department='all'), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
-          
-        
-        
+            try:
+                st.download_button(label=download_label, data=generateWholeLabTables(uploaded_file, department='all'), file_name=f'{"_".join(words)}.xlsx', mime='application/vnd.ms-excel')
+            except ValueError as e:
+                st.warning(e)  
+                
+    # st.error("Invalid file format.")
+            
 
 
 
