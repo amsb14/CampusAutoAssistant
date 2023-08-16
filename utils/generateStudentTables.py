@@ -239,7 +239,7 @@ def run(file1, file2, department):
     # Check if the number of columns is 20, otherwise raise an exception
     if len(dfss01.columns) != 20:
         raise ValueError("Make sure you upload the correct file (SS01) from Rayat!")
-    if len(dfsf24.columns) != 19:
+    if len(dfsf24.columns) != 20:
         raise ValueError("Make sure you upload the correct file (SF24) from Rayat!")
     LIST_OF_STUDENT_ID = get_lab_department(department)  
     output = io.BytesIO()
