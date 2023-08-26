@@ -12,6 +12,7 @@ time_cells_dict = {
 day_cells_dict = {
     "الأحد": "14", "الإثنين": "18", "الثلاثاء": "22", "الاربعاء": "26", "الخميس": "30"
 }
+current_term = str(dfsf24['الفصل التدريبي'].values[0])
     
     
 def get_term_text(term):
@@ -186,7 +187,7 @@ def create_excel_file(student_id):
     worksheet.merge_range("K8:M8", "رقم المتدرب" ,merge_format('#2FBAB3', '9'))
     worksheet.merge_range("N8:P8", f"{student_id}" ,merge_format('#FFFFFF', '9'))
     worksheet.merge_range("Q8:S8", "الفصل التدريبي" ,merge_format('#2FBAB3', '9'))
-    worksheet.merge_range("T8:U8", "الثالث" ,merge_format('#FFFFFF', '9'))
+    worksheet.merge_range("T8:U8", current_term ,merge_format('#FFFFFF', '9'))
 
     worksheet.merge_range("A9:B9", "القسم" ,merge_format('#2FBAB3', '9'))
     worksheet.merge_range("C9:J9", major ,merge_format('#FFFFFF', '9'))
