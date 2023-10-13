@@ -64,7 +64,7 @@ def day_column(s, e, d):
         start += 20
         end += 20
         return start, end
-    elif d == "الاربعاء":
+    elif d == "الأربعاء":
         start += 30
         end += 30
         return start, end
@@ -130,8 +130,8 @@ def ss01Details(userID):
     subject_name = df_new['اسم المقرر'].to_string(index=False).strip()
     ref_subject_id = df_new['الرقم المرجعي'].to_string(index=False)
     laboratories = df_new['قاعة'].to_string(index=False).strip()
-    lecture_times = df_new['أوقات'].to_string(index=False).strip()
-    lecture_days = df_new['أيام'].to_string(index=False).strip()
+    lecture_times = df_new['الوقت'].to_string(index=False).strip()
+    lecture_days = df_new['اليوم'].to_string(index=False).strip()
     
     
     subjects.append(subject_name)
@@ -188,7 +188,7 @@ def create_excel_file():
     worksheet.merge_range("A4:A13", "الأحد", merge_format("#D9D9D9", 12, font='FF0000'))
     worksheet.merge_range("A14:A23", "الإثنين", merge_format("#808080", 12, font='FF0000'))
     worksheet.merge_range("A24:A33", "الثلاثاء", merge_format("#D9D9D9", 12, font='FF0000'))
-    worksheet.merge_range("A34:A43", "الاربعاء", merge_format("#808080", 12, font='FF0000'))
+    worksheet.merge_range("A34:A43", "الأربعاء", merge_format("#808080", 12, font='FF0000'))
     worksheet.merge_range("A44:A53", "الخميس", merge_format("#D9D9D9", 12, font='FF0000'))
     
     

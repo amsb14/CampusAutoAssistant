@@ -10,7 +10,7 @@ time_cells_dict = {
     "12": "JK", "13": "LM", "14": "NO", "15": "PQ", "16": "RS", "17": "TU"
 }
 day_cells_dict = {
-    "الأحد": "14", "الإثنين": "18", "الثلاثاء": "22", "الاربعاء": "26", "الخميس": "30"
+    "الأحد": "14", "الاثنين": "18", "الثلاثاء": "22", "الأربعاء": "26", "الخميس": "30"
 }
 
 def get_term():
@@ -80,9 +80,9 @@ def ss01Details(userID):
         teachers.extend(df_temp['اسم المدرب'].tolist())
         subjects.extend(df_temp['اسم المقرر'].tolist())
         crn.extend(df_temp['الرقم المرجعي'].tolist())
-        times.extend(df_temp['أوقات'].tolist())
+        times.extend(df_temp['الوقت'].tolist())
         classrooms.extend(df_temp['قاعة'].tolist())
-        days.extend(df_temp['أيام'].tolist())
+        days.extend(df_temp['اليوم'].tolist())
         days = [d.strip() for d in days]
     major = df_new['القسم'].iloc[0]
     return teachers, subjects, crn, classrooms, times, days, major

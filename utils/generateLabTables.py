@@ -8,7 +8,7 @@ sheet_name = 'جداول القاعات'
 excel_file = rf'{parent_path}\{sheet_name}.xlsx'
 time_cells_dict = {"08": "BC", "09": "DE", "10": "FG", "11": "HI",
                    "12": "JK", "13": "LM", "14": "NO", "15": "PQ", "16": "RS", "17": "TU"}
-day_cells_dict = {"الأحد": "14", "الإثنين": "17", "الثلاثاء": "20", "الاربعاء": "23", "الخميس": "26"}
+day_cells_dict = {"الأحد": "14", "الاثنين": "17", "الثلاثاء": "20", "الأربعاء": "23", "الخميس": "26"}
 
 
 
@@ -77,8 +77,8 @@ def ss01Details(labID):
     subject_name = df_new['اسم المقرر'].to_string(index=False).strip()
     ref_subject_id = df_new['الرقم المرجعي'].to_string(index=False).strip()
     teachers = df_new['اسم المدرب'].to_string(index=False).strip()
-    lecture_times = df_new['أوقات'].to_string(index=False).strip()
-    lecture_days = df_new['أيام'].to_string(index=False).strip()
+    lecture_times = df_new['الوقت'].to_string(index=False).strip()
+    lecture_days = df_new['اليوم'].to_string(index=False).strip()
 
     subjects.append(subject_name)
     subjects = split(subjects)
