@@ -51,12 +51,12 @@ def removeNonValidString(*args):
     except ValueError:
         pass  # do nothing!
      
-def day_column(s, e, d):
+def day_column(self, s, e, d):
     start = int(s)
     end = int(e)
     if d == 'الأحد':
         return start, end
-    elif d == "الإثنين":
+    elif d == "الاثنين":
         start += 10
         end += 10
         return start, end
