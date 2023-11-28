@@ -50,7 +50,7 @@ def removeNonValidString(*args):
             a.remove("-")
     except ValueError:
         pass  # do nothing!
-     
+      
 def day_column(self, s, e, d):
     start = int(s)
     end = int(e)
