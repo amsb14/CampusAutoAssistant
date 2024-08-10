@@ -110,7 +110,7 @@ def merge_cells(timeslot, day, letter):
     starting_cell = time_cells_dict[s]
     ending_cell = time_cells_dict[e]
 
-    start_column, end_column = self.day_column(starting_cell, ending_cell, day)
+    start_column, end_column = day_column(starting_cell, ending_cell, day)
 
     hours = (end_column - start_column) + 1
     
