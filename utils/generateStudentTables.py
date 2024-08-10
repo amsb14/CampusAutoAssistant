@@ -240,8 +240,8 @@ def run(file1, file2, department):
     global workbook, dfss01, dfsf24
     dfss01 = pd.read_csv(file1)
     dfsf24 = pd.read_csv(file2)
-    # Check if the number of columns is 20, otherwise raise an exception
-    if len(dfss01.columns) != 20:
+    # Check if the number of columns is 24, otherwise raise an exception
+    if len(dfss01.columns) != 24:
         raise ValueError("Make sure you upload the correct file (SS01) from Rayat!")
     if len(dfsf24.columns) != 20:
         raise ValueError("Make sure you upload the correct file (SF24) from Rayat!")

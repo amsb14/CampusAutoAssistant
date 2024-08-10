@@ -223,8 +223,8 @@ def create_excel_file(lab):
 def run(file,department):
     global workbook, df
     df = pd.read_csv(file)
-    # Check if the number of columns is 20, otherwise raise an exception
-    if len(df.columns) != 20:
+    # Check if the number of columns is 24, otherwise raise an exception
+    if len(df.columns) != 24:
         raise ValueError("Make sure you upload the correct file (SS01) from Rayat!")
     LIST_OF_LABS_ID = get_lab_department(department)    
     output = io.BytesIO()
