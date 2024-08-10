@@ -102,24 +102,26 @@ def get_term_text(term):
     
     return term
    
-def merge_cells(timeslot, day, letter):
+def merge_cells(self, timeslot, day, letter):
     x = timeslot.split("-")
-    start_time   = x[1].strip()
-    end_time     = x[0].strip()
+    start_time = x[1].strip()
+    end_time = x[0].strip()
     
     s = start_time[:2]
     e = end_time[:2]
     starting_cell = time_cells_dict[s]
-    ending_cell   = time_cells_dict[e]
+    ending_cell = time_cells_dict[e]
 
-        
-    start_column, end_column = day_column(starting_cell, ending_cell, day)
-    
+    start_column, end_column = self.day_column(starting_cell, ending_cell, day)
+
     hours = (end_column - start_column) + 1
     
-    merge = f"{letter}{start_column}:{letter}{end_column}"
-    
-    return merge, str(hours) 
+    if start_column == end_column:
+        # For single-cell timeslots, return a special marker or the cell itself to handle with write operation
+        return f"{letter}{start_column}", "1"  # Single hour, single cell
+    else:
+        merge = f"{letter}{start_column}:{letter}{end_column}"
+        return merge, str(hours)
 
 def ss01Details(userID):
     subjects, subject_reference, lab_id, days, times = [], [], [], [], []
