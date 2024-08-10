@@ -102,7 +102,7 @@ def get_term_text(term):
     
     return term
    
-def merge_cells(self, timeslot, day, letter):
+def merge_cells(timeslot, day, letter):
     x = timeslot.split("-")
     start_time = x[1].strip()
     end_time = x[0].strip()
