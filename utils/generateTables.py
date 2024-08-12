@@ -68,7 +68,7 @@ def merge_cells(timeslot, day):
 
       
 def ss01Details(userID):
-    subjects, subject_reference, lab_id, days, times = [], [], [], [], []
+    subjects, subject_reference, lab_id, days, times, lec_type = [], [], [], [], [], []
     
     df_new = df[df['رقم المدرب'] == (userID)]
     subject_name = df_new['اسم المقرر'].to_string(index=False).strip()
@@ -76,6 +76,7 @@ def ss01Details(userID):
     laboratories = df_new['قاعة'].to_string(index=False).strip()
     lecture_times = df_new['الوقت'].to_string(index=False).strip()
     lecture_days = df_new['اليوم'].to_string(index=False).strip()
+    lecture_type = df_new['نوع الشعبة'].to_string(index=False).strip()
     
     
     subjects.append(subject_name)
@@ -93,15 +94,18 @@ def ss01Details(userID):
     days.append(lecture_days)
     days = split(days)
     
-    return subjects, subject_reference, lab_id, times, days
+    lec_type.append(lecture_type)
+    lec_type = split(lec_type)
+    
+    return subjects, subject_reference, lab_id, times, days, lec_type
 
 
 def create_excel_file(teacher, computer_id):
     
     worksheet = workbook.add_worksheet(f"{teacher}") # add a new worksheet
     
-    subs, refs, labs, times, days = ss01Details(computer_id)
-    result = removeNonValidTimeSlot(times, subs, refs, labs, days)
+    subs, refs, labs, times, days, lec_types = ss01Details(computer_id)
+    result = removeNonValidTimeSlot(times, subs, refs, labs, days, lec_types)
 
     def total_hours(s, e):
         sum = ord(e) - ord(s) + 1
@@ -161,8 +165,17 @@ def create_excel_file(teacher, computer_id):
         for i in range(14,28+1):
             worksheet.write(f"{letter}{i}:{letter}{i}", "", merge_format2("#FFFFFF", 9))
 
-    for sub, ref, lab, slot in zip(subs, refs, labs, timeslots):
-        worksheet.merge_range(f"{slot}", f'{sub}\n{ref}\n{lab}',  merge_format('#E0E0E0', '9'))
+    for sub, ref, lab, slot, lectype in zip(subs, refs, labs, timeslots, lec_types):
+        notused_words = "صباحي"
+        # Splitting the 'lectype', filtering out 'morning' and 'night', and then joining back the remaining parts
+        lectype_filtered = ' '.join(word for word in lectype.split() if word not in [notused_words])
+        
+        # Constructing the display string with parentheses if 'lectype_filtered' is not empty
+        lectype_display = f' ({lectype_filtered})' if lectype_filtered else ''
+
+        # Now use 'lectype_display' in your merge_range function call
+        worksheet.merge_range(f"{slot}", f'{sub}{lectype_display}\n{ref}\n{str(lab)[-3:]}', merge_format('#E0E0E0', 9))
+
   
     
     colV = workbook.add_format()
