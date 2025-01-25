@@ -4,12 +4,14 @@ import streamlit as st
 import io
 import json
 import warnings
-
 from  utils.generateTables import run as generateTables
 from utils.generateLabTables import run as generateLabTables
 from utils.generateStudentTables import run as generateStudentTables
 from utils.generateWholeTables import run as generateWholeTables
 from utils.generateWholeLabTables import run as generateWholeLabTables
+from utils.analyze_compliance import analyze_compliance
+from data.courses import course_level_mapping_it, course_level_mapping_elec
+
 
 # Import your utility functions
 from utils import searchFreeSlot 
@@ -51,7 +53,7 @@ st.markdown(hide_github_icon, unsafe_allow_html=True)
 
 # Setup Sidebar
 st.sidebar.title("")
-choice = st.sidebar.selectbox("Services Menu", ["تحميل الجداول التدريبية", "استعلامات الجداول"])
+choice = st.sidebar.selectbox("Services Menu", ["تحميل الجداول التدريبية", "استعلامات الجداول", "احصائية الانتظام بالخطط التدريبية"])
 
 def timetables_download():
     title = "تحميل جداول الأقسام التدريبية (مدربين/قاعات/الجداول المجمعة)"
@@ -238,13 +240,53 @@ def find_slot():
                 st.error("Invalid CRN or no data available for the provided CRN.")
         except ValueError:
             st.error("Please enter a valid CRN.")
-                    
+
+def analyze_statistical_compliance():
+    title = "احصائية الانتظام بالخطط التدريبية"
+    st.markdown(f'<div class="rtl" style="font-size: 30pt; font-family: Cairo; margin-bottom: 100px; text-align: center;">{title}</div>', unsafe_allow_html=True)
+    
+    # File upload input
+    upload_text = "قم برفع ملف SS05 بتنسيق (CSV)"
+    st.markdown(f'<div class="rtl" style="font-size: 12pt; font-family: Cairo;">{upload_text}</div>', unsafe_allow_html=True)
+    uploaded_file = st.file_uploader("", type='csv', key="compliance")
+    
+    # Dropdown for department selection
+    department = st.selectbox("اختر القسم:", ["الحاسب وتقنية المعلومات", "التقنية الالكترونية"])
+    
+    # User inputs the current term
+    current_term = st.text_input("ادخل الفصل التدريبي الحالي (مثال: 144520):", key="current_term")
+    
+    
+    
+    if uploaded_file and current_term and department:
+        try:
+
+            
+            # Select course mapping based on department
+            course_mapping = course_level_mapping_it if department == "الحاسب وتقنية المعلومات" else course_level_mapping_elec
+            
+            # Run analysis with the selected department's course mapping
+            result_table = analyze_compliance(uploaded_file, current_term, course_mapping)
+            st.write("جدول الاحصائيات:")
+            st.dataframe(result_table)
+            
+            # Provide download option
+            download_label = "تحميل جدول الاحصائية"
+            file_name = "compliance_statistics.xlsx"
+            with pd.ExcelWriter(file_name, engine='xlsxwriter') as writer:
+                result_table.to_excel(writer, index=False, sheet_name='Statistics')
+            st.download_button(label=download_label, data=open(file_name, "rb").read(), file_name=file_name, mime='application/vnd.ms-excel')
+        except Exception as e:
+            st.warning(f"⚠️ الملف الذي رفعته قد يكون خاص بقسم آخر . الرجاء رفع الملف الصحيح")
+
 # Main app logic
 if choice == "تحميل الجداول التدريبية":
     timetables_download()
 elif choice == "استعلامات الجداول":
     find_slot()
-
+elif choice == "احصائية الانتظام بالخطط التدريبية":
+    analyze_statistical_compliance()
+                    
             
 
 
