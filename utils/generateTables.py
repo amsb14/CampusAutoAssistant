@@ -254,13 +254,32 @@ def create_excel_file(teacher, computer_id):
         worksheet.merge_range(f"{TIME_CELLS_DICT[i][0]}{row}:{TIME_CELLS_DICT[i][1]}{row}", f'{s}',  merge_format('#E0E0E0', '9'))
         worksheet.merge_range(f"{TIME_CELLS_DICT[i][0]}{row+1}:{TIME_CELLS_DICT[i][1]}{row+1}", f'{e}',  merge_format('#E0E0E0', '9'))
 
+
+REQUIRED_COLUMNS = [
+    'اسم المدرب',
+    'رقم المدرب',
+    'القسم',
+    'الفصل التدريبي',
+    'الرقم المرجعي',
+    'قاعة',
+    'الوقت',
+    'اليوم',
+    'اسم المقرر'
+]   
+
         
 def run(file,department):
     global workbook, df
     df = pd.read_csv(file)
-    # Check if the number of columns is 24, otherwise raise an exception
-    if len(df.columns) != 24:
-        raise ValueError("Make sure you upload the correct file (SS01) from Rayat!")
+    
+    # Check for required columns
+    missing_columns = [col for col in REQUIRED_COLUMNS if col not in df.columns]
+    if missing_columns:
+        raise ValueError(
+            f"Invalid file format. Missing required columns: {', '.join(missing_columns)}. "
+            "Ensure you're using the correct SS01 file from Rayat."
+        )
+        
     LIST_OF_TEACHERS_ID = get_lab_department(department)
     output = io.BytesIO()
     workbook = xlsxwriter.Workbook(output, {'in_memory': True})  

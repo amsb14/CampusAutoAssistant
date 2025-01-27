@@ -235,14 +235,29 @@ def create_excel_file(student_id):
         worksheet.merge_range(f"{time_cells_dict[i][0]}{row}:{time_cells_dict[i][1]}{row}", f'{s}',  merge_format('#2FBAB3', '9'))
         worksheet.merge_range(f"{time_cells_dict[i][0]}{row+1}:{time_cells_dict[i][1]}{row+1}", f'{e}',  merge_format('#2FBAB3', '9'))
          
+REQUIRED_COLUMNS = [
+    'اسم المدرب',
+    'رقم المدرب',
+    'القسم',
+    'الفصل التدريبي',
+    'الرقم المرجعي',
+    'قاعة',
+    'الوقت',
+    'اليوم',
+    'اسم المقرر'
+]
         
 def run(file1, file2, department):
     global workbook, dfss01, dfsf24
     dfss01 = pd.read_csv(file1)
     dfsf24 = pd.read_csv(file2)
-    # Check if the number of columns is 24, otherwise raise an exception
-    if len(dfss01.columns) != 24:
-        raise ValueError("Make sure you upload the correct file (SS01) from Rayat!")
+    # Check for required columns
+    missing_columns = [col for col in REQUIRED_COLUMNS if col not in dfss01.columns]
+    if missing_columns:
+        raise ValueError(
+            f"Invalid file format. Missing required columns: {', '.join(missing_columns)}. "
+            "Ensure you're using the correct SS01 file from Rayat."
+        )
     if len(dfsf24.columns) != 20:
         raise ValueError("Make sure you upload the correct file (SF24) from Rayat!")
     LIST_OF_STUDENT_ID = get_lab_department(department)  
